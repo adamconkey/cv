@@ -28,17 +28,20 @@ The intrinsic parameters are unique to each camera, and can be estimated through
 
 While the intrinsics provide a mapping between image coordinates and camera coordinates, we need to also account for the fact that the camera may be physically located in different poses with respect to objects in the scene. Extrinsic parameters account for this by determining the camera's pose in the scene defined by a rotation and translation. If a reference frame is known (e.g. a checkerboard calibration pattern), then we can try to compute the camera's pose in the reference frame. Oftentimes there is no such reference frame, but we can still try to compute the _relative pose_ of the camera between two images of the same scene. We will leverage this idea in the code below.
 
-## Consensus Algorithm - ARRSAC
+## Consensus Algorithms
 
-**TODO:**
+As you may have noticed visually inspecting the feature matches betwen the two images, the matches are not always correct, even when we use symmetric feature matching. In order to infer the correct camera motion between the two images, we need some means of dealing with the fact that there are incorrect matches amongst the correct matches. We lean on the power of _consensus algorithms_ to achieve this.
+
+Random sample consensus (RANSAC) is an iconic consensus algorithm that seeks to fit a model to the correct data (inliers) while being robust to the presence of outliers.
+
+**TODO:** Add description of RANSAC algorithm
+
+**TODO:** Add a statement about ARRSAC and its relation to RANSAC, since it's what is used in the code.
 
 
 ## Estimators - Eight Point Algorithm
 
 **TODO:**
-
-
-
 
 
 
@@ -89,8 +92,3 @@ let camera = CameraIntrinsicsK1Distortion::new(
 You will notice there is one extra scalar value that we did not yet cover, which is the K1 distortion coefficient, as the name `CameraIntrinsicsK1Distortion` suggests. Distortion coefficients can help correct warps in the image due to imperfections in the camera lens.
 
 **TODO:** Complete rest of walkthrough of code
-
-
-## End
-
-This is the end of this chapter.
