@@ -62,14 +62,14 @@ If all went well you should have a window and see this:
 The initial code will look familiar from the previous chapter on feature matching. We again open two images taken with the same camera in the same scene from the Kitti dataset, extract Akaze features for each of them, and compute the symmetric feature matches between them.
 
 ```rust
-    let src_image_a = image::open("res/0000000000.png").expect("failed to open image file");
-    let src_image_b = image::open("res/0000000014.png").expect("failed to open image file");
+let src_image_a = image::open("res/0000000000.png").expect("failed to open image file");
+let src_image_b = image::open("res/0000000014.png").expect("failed to open image file");
 
-    let akaze = Akaze::default();
+let akaze = Akaze::default();
 
-    let (key_points_a, descriptors_a) = akaze.extract(&src_image_a);
-    let (key_points_b, descriptors_b) = akaze.extract(&src_image_b);
-    let matches = symmetric_matching(&descriptors_a, &descriptors_b);
+let (key_points_a, descriptors_a) = akaze.extract(&src_image_a);
+let (key_points_b, descriptors_b) = akaze.extract(&src_image_b);
+let matches = symmetric_matching(&descriptors_a, &descriptors_b);
 ```
 
 
