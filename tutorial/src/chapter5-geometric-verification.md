@@ -57,7 +57,38 @@ If all went well you should have a window and see this:
 
 ## The code
 
-**TODO:** Add walkthrough of code
+### Feature Matching
+
+The initial code will look familiar from the previous chapter on feature matching. We again open two images taken with the same camera in the same scene from the Kitti dataset, extract Akaze features for each of them, and compute the symmetric feature matches between them.
+
+```rust
+    let src_image_a = image::open("res/0000000000.png").expect("failed to open image file");
+    let src_image_b = image::open("res/0000000014.png").expect("failed to open image file");
+
+    let akaze = Akaze::default();
+
+    let (key_points_a, descriptors_a) = akaze.extract(&src_image_a);
+    let (key_points_b, descriptors_b) = akaze.extract(&src_image_b);
+    let matches = symmetric_matching(&descriptors_a, &descriptors_b);
+```
+
+
+### Camera Intrinsics
+
+Our goal is to utilize the feature matches to infer the motion of the camera in the scene. To do that, we require the intrinsic parameters of the camera used to capture the photos. Luckily for us, that information is provided with the Kitti dataset. We instantiate a camera instance with the provided focal length and principal point:
+
+```rust
+let camera = CameraIntrinsicsK1Distortion::new(
+        CameraIntrinsics::identity()
+            .focals(Vector2::new(9.842439e+02, 9.808141e+02))
+            .principal_point(Point2::new(6.900000e+02, 2.331966e+02)),
+        -3.728755e-01,
+    );
+```
+
+You will notice there is one extra scalar value that we did not yet cover, which is the K1 distortion coefficient, as the name `CameraIntrinsicsK1Distortion` suggests. Distortion coefficients can help correct warps in the image due to imperfections in the camera lens.
+
+**TODO:** Complete rest of walkthrough of code
 
 
 ## End
