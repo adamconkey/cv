@@ -11,7 +11,8 @@ In order to relate image features to objects in the 3D scene captured by the cam
 The pinhole camera model a common camera parameterizeration, which is an idealized model that constructs the projected image based on how light beams would pass through a point aperature. This model does not account for the challenges of real lenses (e.g. distortion, blurring) but is a reasonable approximation of the geometric mapping between 3D space and image space.
 
 The parameters of interest are the focal length $(f_x, f_y)$,  which describes the distance between the projected image and the camera, and the principal point $(c_x, c_y)$ which determines the center of the image plane. These together comprise the intrisics matrix:
-$$
+
+```math
 K = \left[
         \begin{array}{cc}
         f_x &   0 & c_x \\
@@ -19,7 +20,7 @@ K = \left[
           0 &   0 &   1 \\
         \end{array}
     \right]
-$$
+```
 
 The intrinsic parameters are unique to each camera, and can be estimated through a calibration procedure. Many cameras are factory calibrated and the intrinsics are provided along with the purchased camera.
 
