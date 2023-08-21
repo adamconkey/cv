@@ -23,6 +23,10 @@ $$
 
 The intrinsic parameters are unique to each camera, and can be estimated through a calibration procedure. Many cameras are factory calibrated and the intrinsics are provided along with the purchased camera.
 
+### Extrinsics
+
+While the intrinsics provide a mapping between image coordinates and camera coordinates, we need to also account for the fact that the camera may be physically located in different poses with respect to objects in the scene. Extrinsic parameters account for this by determining the camera's pose in the scene defined by a rotation translation. If a reference frame is known (e.g. a checkerboard calibration pattern), then we can try to compute the camera's pose in the reference frame. Oftentimes there is no such reference frame, but we can still try to compute the _relative pose_ of the camera between two images of the same scene. We will leverage this idea in the code below.
+
 ## Consensus Algorithm - ARRSAC
 
 **TODO:**
